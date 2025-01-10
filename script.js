@@ -8,6 +8,10 @@ function setup() {
 }
 
 function draw() {
+  // reset if midngiht
+  if (hour() === 0 && minute() === 0) {
+    hour_branches = [];
+  }
   // set sky
   let night_color = color(20, 20, 50);
   let day_color = color(199, 240, 255);

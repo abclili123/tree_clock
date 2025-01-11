@@ -1,6 +1,7 @@
 let snowflakes = [];
 let hour_branches = [];
 let maxTrunkHeight = 900;
+let lastSnowflakeTime = 0;
 
 function setup() {
   createCanvas(400, 1200);
@@ -64,13 +65,18 @@ function draw() {
   drawSnowflakes();
 }
 
-function createSnowflakes() {
-  if (random() < 0.1) { // random chance to generate snow flakes
-    let size = random(2, 5); // size
-    let snowflake = new Snowflake(random(width), 0, size);
-    snowflakes.push(snowflake);
+function createSnowflakes() {  
+    // one snow flake per second
+    currentSecond = second()
+    if (currentSecond > lastSnowflakeTime) {
+      let size = random(2, 5); // size
+      let snowflake = new Snowflake(random(width), 0, size);
+      snowflakes.push(snowflake);
+  
+      // Update the last snowflake creation time
+      lastSnowflakeTime = currentSecond;
+    }
   }
-}
 
 function updateSnowflakes() {
   // snow flake position
